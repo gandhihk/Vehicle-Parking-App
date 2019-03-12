@@ -42,12 +42,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class Login extends AppCompatActivity
 {
-
     // UI references.
     private AutoCompleteTextView usernameView;
     private EditText mPasswordView;
@@ -111,39 +112,38 @@ public class Login extends AppCompatActivity
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) || !isPasswordValid(password))
+        {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(username)) {
+        if (TextUtils.isEmpty(username))
+        {
             usernameView.setError(getString(R.string.error_field_required));
             focusView = usernameView;
             cancel = true;
-        } else if (!isUsernameValid(username)) {
-            usernameView.setError(getString(R.string.error_invalid_email));
+        } else if (!isUsernameValid(username))
+        {
+            usernameView.setError(getString(R.string.error_invalid_username));
             focusView = usernameView;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             login(username, password);
             mProgressView.setVisibility(View.GONE);
         }
     }
 
     private boolean isUsernameValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(email);
+
+        return !m.find();
     }
 
     private boolean isPasswordValid(String password) {
