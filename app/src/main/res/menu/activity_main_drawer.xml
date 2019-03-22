@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:icon="@drawable/my_profile"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_add_vehicle"
+            android:icon="@drawable/add_vehicle"
+            android:title="Add Vehicle" />
+        <item
+            android:id="@+id/nav_parking_history"
+            android:icon="@drawable/parking_history"
+            android:title="Parking History" />
+        <item
+            android:id="@+id/nav_current_session"
+            android:icon="@drawable/current_session"
+            android:title="Current Session" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/about"
+            android:title="About" />
+    </group>
+
+</menu>

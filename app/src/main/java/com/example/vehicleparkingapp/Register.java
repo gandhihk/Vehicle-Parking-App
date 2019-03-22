@@ -1,12 +1,28 @@
 package com.example.vehicleparkingapp;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +49,9 @@ public class Register extends AppCompatActivity
         setContentView(R.layout.register);
 
         initializeViews();
+
+        alertDialog = new AlertDialog.Builder(
+                Register.this).create();
     }
 
     private void initializeViews()
@@ -62,7 +81,72 @@ public class Register extends AppCompatActivity
         address = addressView.getText().toString();
         if(!validate())
         {
-            //
+            final ProgressDialog pDialog = new ProgressDialog(this);
+            pDialog.setMessage("Loading...");
+            pDialog.show();
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            Map<String, String> params = new HashMap<>();
+            //Adding parameters to request
+            params.put(ConfigConstants.KEY_USERNAME, username);
+            params.put(ConfigConstants.KEY_PASSWORD, password);
+            params.put("operation", "signin");
+            params.put("first_name", fname);
+            params.put("last_name", lname);
+            params.put("phone", phone);
+            params.put("licence", licence);
+            params.put("address", address);
+
+
+            //Creating a json request
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, ConfigConstants.LOGIN_REGISTER_URL, new JSONObject(params), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //Toast.makeText(Register.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                if ((response.getString("message")).equals("success"))
+                                {
+                                    JSONObject user = response.getJSONObject("user");
+                                    onSuccessfulSignin(user);
+                                    pDialog.hide();
+                                }
+                                else if((response.getString("message")).equals("invalid username"))
+                                {
+                                    usernameView.setError("Username already taken");
+                                    usernameView.requestFocus();
+                                    pDialog.hide();
+                                }
+                                else
+                                {
+                                    alertDialog.setTitle("Error");
+                                    alertDialog.setMessage("There's a problem creating your account. Please try again with correct information.");
+                                    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            //
+                                        }
+                                    });
+                                    alertDialog.show();
+                                    pDialog.hide();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(),
+                                        "Error: " + e.getMessage(),
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    //You can handle error here if you want
+                                }
+                            });
+
+            //Adding the string request to the queue
+            requestQueue.add(jsonObjectRequest);
         }
     }
 
@@ -123,6 +207,17 @@ public class Register extends AppCompatActivity
             focusView.requestFocus();
         return cancel;
     }
+
+
+    private void onSuccessfulSignin(JSONObject user) {
+        SessionManager s = new SessionManager(getApplicationContext());
+        s.createLoginSession(user);
+        Intent intent = new Intent(this, MainActivity.class);
+        MainActivity.h.sendEmptyMessage(0);
+        startActivity(intent);
+        finish();
+    }
+
 
     public void addVehicle(View view)
     {

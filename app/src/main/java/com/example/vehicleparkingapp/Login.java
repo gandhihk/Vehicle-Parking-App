@@ -35,6 +35,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -112,7 +119,7 @@ public class Login extends AppCompatActivity
         boolean cancel = false;
         View focusView = null;
 
-        if (!TextUtils.isEmpty(password) || !isPasswordValid(password))
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password))
         {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
@@ -158,40 +165,36 @@ public class Login extends AppCompatActivity
         finish();
     }
 
-    void login(final String email, final String password)
+    void login(final String username, final String password)
     {
-        /*final ProgressDialog pDialog = new ProgressDialog(this);
+        final ProgressDialog pDialog = new ProgressDialog(this);
         pDialog.setMessage("Loading...");
         pDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Map<String,String> params = new HashMap<>();
         //Adding parameters to request
-        params.put(ConfigConstants.KEY_EMAIL, email);
+        params.put(ConfigConstants.KEY_USERNAME, username);
         params.put(ConfigConstants.KEY_PASSWORD, password);
         params.put("operation", "login");
 
         //Creating a json request
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, ConfigConstants.LOGIN_SIGNIN_URL, new JSONObject(params), new Response.Listener<JSONObject>() {
+                (Request.Method.POST, ConfigConstants.LOGIN_REGISTER_URL, new JSONObject(params), new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             //Toast.makeText(Login.this, response.toString(), Toast.LENGTH_LONG).show();
                             if ((response.getString("message")).equals("success"))
                             {
-                                // Parsing json object response
-                                // response will be a json object
                                 JSONObject user = response.getJSONObject("user");
                                 onSuccessfulLogin(user);
                                 pDialog.hide();
                             }
                             else
                             {
-                                //If the server response is not success
-                                //Displaying an error message on toast
                                 alertDialog.setTitle("Login Failed");
-                                alertDialog.setMessage("Please enter correct email and password");
+                                alertDialog.setMessage("Please enter correct username and password");
                                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -217,16 +220,17 @@ public class Login extends AppCompatActivity
                         });
 
         //Adding the string request to the queue
-        requestQueue.add(jsonObjectRequest);*/
+        requestQueue.add(jsonObjectRequest);
     }
 
     private void onSuccessfulLogin(JSONObject user)
     {
-        /*SessionManager s = new SessionManager(getApplicationContext());
+        SessionManager s = new SessionManager(getApplicationContext());
         s.createLoginSession(user);
-        Intent intent = new Intent(this, HomeActivity.class);
-        HomeActivity.h.sendEmptyMessage(0);
-        startActivity(intent);*/
+        //Toast.makeText(Login.this, user.toString(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        MainActivity.h.sendEmptyMessage(0);
+        startActivity(intent);
         finish();
     }
 

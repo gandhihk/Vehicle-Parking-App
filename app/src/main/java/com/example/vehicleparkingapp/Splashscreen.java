@@ -12,12 +12,13 @@ public class Splashscreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.SplashTheme);
         super.onCreate(savedInstanceState);
 
         Intent intent;
-        if(!isOnline())
+        if(isOnline())
         {
-            intent = new Intent(this, Home.class);
+            intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         }
