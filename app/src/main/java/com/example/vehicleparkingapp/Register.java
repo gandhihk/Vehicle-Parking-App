@@ -79,7 +79,7 @@ public class Register extends AppCompatActivity
         phone = phoneTextView.getText().toString();
         licence = licenceView.getText().toString();
         address = addressView.getText().toString();
-        if(!validate())
+        if(validate())
         {
             final ProgressDialog pDialog = new ProgressDialog(this);
             pDialog.setMessage("Loading...");
@@ -195,6 +195,7 @@ public class Register extends AppCompatActivity
         else if(!conf_password.equals(password)){
             mconfirmPassView.setError(getString(R.string.error_conf_password));
             focusView = mconfirmPassView;
+            cancel = true;
         }
         else if(licence.length()!=12){
             licenceView.setError(getString(R.string.error_invalid_licence));
@@ -205,22 +206,13 @@ public class Register extends AppCompatActivity
 
         if (cancel)
             focusView.requestFocus();
-        return cancel;
+        return !cancel;
     }
 
 
     private void onSuccessfulSignin(JSONObject user) {
-        SessionManager s = new SessionManager(getApplicationContext());
-        s.createLoginSession(user);
-        Intent intent = new Intent(this, MainActivity.class);
-        MainActivity.h.sendEmptyMessage(0);
-        startActivity(intent);
-        finish();
-    }
-
-
-    public void addVehicle(View view)
-    {
-
+        Intent i = new Intent(this, OTPValidation.class);
+        i.putExtra("user",user.toString());
+        startActivity(i);
     }
 }

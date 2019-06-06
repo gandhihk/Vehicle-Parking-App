@@ -1,14 +1,20 @@
 package com.example.vehicleparkingapp;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import java.io.IOException;
 
 public class Splashscreen extends AppCompatActivity {
+
+    int MY_PERMISSIONS_REQUEST_RECEIVE_SMS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,9 @@ public class Splashscreen extends AppCompatActivity {
         Intent intent;
         if(isOnline())
         {
+            // Asking for all permissions
+
+
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

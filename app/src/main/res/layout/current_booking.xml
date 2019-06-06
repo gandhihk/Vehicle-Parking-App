@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/slot_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="8dp"
+        android:layout_below="@id/booking_details_txt"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/booking_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:text="Booking ID :    "/>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:background="#000"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/level_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:text="Level Number :    "/>
+
+                <TextView
+                    android:id="@+id/slot_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:text="Slot Number :    "/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:text="Date :    "/>
+
+                <TextView
+                    android:id="@+id/entry_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:text="Entry Time :  "/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="Duration :    "/>
+
+            <TextView
+                android:id="@+id/vehicle_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="Vehicle Category :    "/>
+
+            <TextView
+                android:id="@+id/fare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="Estimated Fare :    "/>
+
+            <TextView
+                android:id="@+id/otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="OTP :    "/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/time_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:text="Time left for booking to end :"/>
+
+                <RelativeLayout
+                    android:id="@+id/time_layout"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/time_left">
+
+                    <ProgressBar
+                        android:id="@+id/view_progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_centerInParent="true"
+                        android:progressDrawable="@drawable/drawable_circularprogressbar" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_timer"
+                        android:textSize="18sp"
+                        android:textColor="#000"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/total_fare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/time_layout"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:visibility="gone"
+                    android:text="Total Fare :    "/>
+
+                <Button
+                    android:id="@+id/extend_parking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/time_layout"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    android:onClick="extendParking"
+                    android:visibility="visible"
+                    android:text="Extend Parking" />
+
+                <Button
+                    android:id="@+id/endparking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/extend_parking"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    android:onClick="endParking"
+                    android:text="End Parking" />
+
+                <Button
+                    android:id="@+id/online_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/total_fare"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    android:onClick="make_payment"
+                    android:visibility="gone"
+                    android:text="Make Online payment" />
+
+                <Button
+                    android:id="@+id/offline_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_below="@+id/online_pay"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    android:onClick="make_payment"
+                    android:visibility="gone"
+                    android:text="Make Offline payment" />
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

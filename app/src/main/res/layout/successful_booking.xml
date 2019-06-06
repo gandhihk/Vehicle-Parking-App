@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessfulBooking">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/booking_successful"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/successful"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:text="Booking Successful !!"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        app:theme="@style/Theme.BackButton"/-->
+
+    <RelativeLayout
+        android:id="@+id/booking_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/booking_successful"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/booking_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Details"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/booking_details"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/booking_id_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Booking ID :   "
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/booking_id"
+                android:layout_toRightOf="@+id/booking_id_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/entry_time_txt"
+                android:layout_below="@+id/booking_id_txt"
+                android:layout_alignRight="@+id/booking_id_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Entry Time :   "
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/entry_time"
+                android:layout_toRightOf="@+id/entry_time_txt"
+                android:layout_below="@+id/booking_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/duration_txt"
+                android:layout_alignRight="@+id/entry_time_txt"
+                android:layout_below="@+id/entry_time_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Duration :   "
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_below="@+id/entry_time"
+                android:layout_toRightOf="@+id/duration_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/fare_txt"
+                android:layout_alignRight="@+id/duration_txt"
+                android:layout_below="@+id/duration_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Estimated Fare :   "
+                android:textColor="#000"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/fare"
+                android:layout_below="@+id/duration"
+                android:layout_toRightOf="@+id/fare_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/time_left"
+        android:layout_below="@+id/booking_details_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:text="Time left for booking to start :"/>
+
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/time_left">
+
+        <ProgressBar
+            android:id="@+id/view_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/drawable_circularprogressbar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_timer"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/go_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:text="Go Home"
+        android:onClick="gohome"/>
+</RelativeLayout>

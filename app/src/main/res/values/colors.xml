@@ -18,4 +18,5 @@
     <color name="darkslateblue">#483D8B</color>
     <color name="rebeccapurple">#663399</color>
     <color name="midnightblue">#191970</color>
+    <color name="tab_selected">#e8f5e9</color>
 </resources>

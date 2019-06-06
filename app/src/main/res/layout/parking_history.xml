@@ -5,10 +5,36 @@
     android:layout_height="match_parent"
     tools:context=".ParkingHistory">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Previous Bookings"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ScrollView
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Parking History" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/scrollView"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/no_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Parking History \nfound !"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

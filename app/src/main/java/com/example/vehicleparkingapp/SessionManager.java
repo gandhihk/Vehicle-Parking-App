@@ -39,12 +39,11 @@ public class SessionManager
         try
         {
             editor.putString(ConfigConstants.KEY_USERNAME, user.getString("username"));
-            editor.putString(ConfigConstants.KEY_PASSWORD, user.getString("password"));
-            editor.putString(ConfigConstants.KEY_FNAME, user.getString("name"));
-            editor.putInt(ConfigConstants.KEY_ID, user.getInt("id"));
+            editor.putString(ConfigConstants.KEY_FNAME, user.getString("first_name"));
             editor.putString(ConfigConstants.KEY_LNAME, user.getString("last_name"));
-            editor.putString(ConfigConstants.KEY_PHONE, user.getString("contact_num"));
-            editor.putString(ConfigConstants.KEY_PROOFTYPE, user.getString("proof_type"));
+            editor.putString(ConfigConstants.KEY_PHONE, user.getString("contact"));
+            editor.putString(ConfigConstants.KEY_LICENCE, user.getString("licence_number"));
+            editor.putString(ConfigConstants.KEY_ADDRESS, user.getString("address"));
         }catch (JSONException js)
         {
             Log.e("MYAPP", "unexpected JSON exception", js);
@@ -54,11 +53,20 @@ public class SessionManager
         editor.commit();
     }
 
-    /**
-     * Check login method wil check user login status
-     * If false it will redirect user to login page
-     * Else won't do anything
-     * */
+    public void updateLoginSession(String first_name, String last_name, String address, String licence)
+    {
+        // Storing login value as TRUE
+        editor.putBoolean(ConfigConstants.IS_LOGIN, true);
+        editor.putString(ConfigConstants.KEY_FNAME, first_name);
+        editor.putString(ConfigConstants.KEY_LNAME, last_name);
+        editor.putString(ConfigConstants.KEY_LICENCE, licence);
+        editor.putString(ConfigConstants.KEY_ADDRESS, address);
+
+        // commit changes
+        editor.commit();
+    }
+
+
     public void checkLogin()
     {
         // Check login status
@@ -76,6 +84,8 @@ public class SessionManager
         }
 
     }
+
+
 
     /**
      * Clear session details
