@@ -3,7 +3,7 @@ package com.example.vehicleparkingapp;
 public class ConfigConstants
 {
     //URL to our php file
-    public static final String ROOT_URL = "http://ec2-52-41-53-193.us-west-2.compute.amazonaws.com/vehicleparkingapp/";
+    public static final String ROOT_URL = "http://ec2-52-41-53-193.us-west-2.compute.amazonaws.com/vehicleparkingapp/api_files/";
 
     //Keys for email and password as defined in our $_POST['key'] in login.php
     public static final String KEY_USERNAME = "username";
