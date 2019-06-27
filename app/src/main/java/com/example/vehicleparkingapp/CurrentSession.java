@@ -1,5 +1,6 @@
 package com.example.vehicleparkingapp;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -71,7 +72,7 @@ public class CurrentSession extends Fragment {
     static private String mParam2,username;
     int progress;
     CountDownTimer countDownTimer;
-
+    ProgressDialog pDialog;
     View b,rootview;
     TextView booking_id_txt,entry_time_txt,fare_txt,date_txt,vehicle_txt,otp_txt,level_num_txt,total_fare_txt,time_left_txt,slot_num_txt,duration_txt;
     LinearLayout scrollView;
@@ -123,7 +124,9 @@ public class CurrentSession extends Fragment {
         SessionManager s = new SessionManager(getContext());
         SharedPreferences sp = s.pref;
         username = sp.getString(ConfigConstants.KEY_USERNAME,"");
-
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
         getCurrentBookings(inflater);
         extend_parking_visible=true;
 
@@ -166,6 +169,7 @@ public class CurrentSession extends Fragment {
                                 {
                                     scrollView.findViewById(R.id.no_current).setVisibility(View.VISIBLE);
                                 }
+                                pDialog.hide();
                             }
 
                         } catch (JSONException e) {

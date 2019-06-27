@@ -1,6 +1,7 @@
 package com.example.vehicleparkingapp;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;

@@ -97,7 +97,8 @@ public class SuccessfulBooking extends AppCompatActivity
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            //Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(SuccessfulBooking.this, response.toString(), Toast.LENGTH_LONG).show();
+                            Log.i("hhi",response.toString());
                             if ((response.getString("message")).equals("success"))
                             {
                                 fare = response.getInt("fare");
@@ -248,8 +249,6 @@ public class SuccessfulBooking extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        //getActivity().registerReceiver(br, new IntentFilter(Timer_Service.COUNTDOWN_BR));
-        //Log.i(TAG, "Registered broacast receiver");
     }
 
     @Override
@@ -262,8 +261,6 @@ public class SuccessfulBooking extends AppCompatActivity
 
     @Override
     public void onDestroy() {
-        //getActivity().stopService(new Intent(getActivity(), Timer_Service.class));
-        //Log.i(TAG, "Stopped service");
         super.onDestroy();
     }
 

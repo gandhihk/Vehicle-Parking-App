@@ -154,6 +154,7 @@ public class OTPValidation extends AppCompatActivity {
     public void checkOTP(View view)
     {
         String entered_otp = otp_text.getText().toString();
+        Toast.makeText(OTPValidation.this, entered_otp, Toast.LENGTH_LONG).show();
         if(otp_from_database == otp_from_sms || entered_otp.equals(String.valueOf(otp_from_database)))
             otp_valid = true;
 

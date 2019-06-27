@@ -1,6 +1,7 @@
 package com.example.vehicleparkingapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -58,7 +59,7 @@ public class Home extends Fragment
     int STATUS_AVAILABLE = 1;
     int STATUS_BOOKED = 2;
     static int level_number,slot_number;
-
+    ProgressDialog pDialog;
     int total_levels,total_slots;
 
     private String mParam1;
@@ -95,6 +96,10 @@ public class Home extends Fragment
         }
         requestQueue = Volley.newRequestQueue(getActivity());
         slot_maps = new ArrayList<>();
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
     }
 
     @Override
@@ -181,7 +186,7 @@ public class Home extends Fragment
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            //Toast.makeText(Login.this, response.toString(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getActivity(), response.toString(), Toast.LENGTH_LONG).show();
                             if ((response.getString("message")).equals("success"))
                             {
                                 JSONArray map = response.getJSONArray("map");
@@ -195,7 +200,7 @@ public class Home extends Fragment
                                     //Toast.makeText(getActivity(), booked_slots, Toast.LENGTH_LONG).show();
                                     createMapForThisLevel(level_num,no_of_slots,booked_slots);
                                 }
-
+                                pDialog.hide();
                                 setUpTabs();
                                 //layout.removeAllViews();
                                 //Toast.makeText(getActivity(), String.valueOf(layout.getChildCount()), Toast.LENGTH_LONG).show();
@@ -225,10 +230,20 @@ public class Home extends Fragment
 
     void createMapForThisLevel(int level_num, int no_of_slots, String booked_slots)
     {
+
+        String[] slots = booked_slots.split(" ");
         String seats = "/";
+        boolean flag;
         for(int i=1;i<=no_of_slots;i++)
         {
-            if(booked_slots.contains(String.valueOf(i)))
+            //seats=seats+"A";
+            flag=false;
+            for(String x:slots)
+            {
+                if(x.equals(String.valueOf(i)))
+                    flag=true;
+            }
+            if(flag)
                 seats = seats+"B";
             else
                 seats = seats+"A";
@@ -239,6 +254,8 @@ public class Home extends Fragment
                 seats = seats+"__";
         }
         seats=seats+"/";
+
+
         slot_maps.add(seats);
         //Toast.makeText(getActivity(), slot_maps.get(slot_maps.size()-1), Toast.LENGTH_LONG).show();
     }

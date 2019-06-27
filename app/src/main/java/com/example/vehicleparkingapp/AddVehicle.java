@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,7 +69,7 @@ public class AddVehicle extends Fragment {
 
     static RequestQueue requestQueue;
     static JSONArray vehicles;
-
+    ProgressDialog pDialog;
     static Activity activity;
 
     public AddVehicle() {
@@ -104,6 +105,9 @@ public class AddVehicle extends Fragment {
         activity = getActivity();
 
         requestQueue = Volley.newRequestQueue(getActivity());
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         SessionManager s = new SessionManager(getContext());
         SharedPreferences sp = s.pref;
@@ -261,6 +265,7 @@ public class AddVehicle extends Fragment {
                             {
                                 vehicles = response.getJSONArray("vehicles");
                                 setAddedVehicles(rootview,inflater);
+                                pDialog.hide();
                             }
 
                         } catch (JSONException e) {

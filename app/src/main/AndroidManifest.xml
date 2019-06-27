@@ -22,7 +22,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".NextStep" />
 
-        <service android:enabled="true" android:name="com.example.vehicleparkingapp.Timer_Service" />
+        <!--service android:enabled="true" android:name="com.example.vehicleparkingapp.Timer_Service" /-->
         <service android:name="com.example.vehicleparkingapp.BoundService"/>
 
         <receiver

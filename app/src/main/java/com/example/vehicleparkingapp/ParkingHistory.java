@@ -1,5 +1,6 @@
 package com.example.vehicleparkingapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,7 +47,7 @@ public class ParkingHistory extends Fragment {
     String username;
 
     private RequestQueue requestQueue;
-
+    ProgressDialog pDialog;
     private OnFragmentInteractionListener mListener;
 
     public ParkingHistory() {
@@ -85,7 +86,9 @@ public class ParkingHistory extends Fragment {
         SessionManager s = new SessionManager(getContext());
         SharedPreferences sp = s.pref;
         username = sp.getString(ConfigConstants.KEY_USERNAME,"");
-
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
         getHistory(inflater);
 
         return rootview;
@@ -123,6 +126,7 @@ public class ParkingHistory extends Fragment {
                                 {
                                     scrollView.findViewById(R.id.no_history).setVisibility(View.VISIBLE);
                                 }
+                                pDialog.hide();
                             }
 
                         } catch (JSONException e) {

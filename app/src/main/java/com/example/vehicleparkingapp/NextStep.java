@@ -199,7 +199,7 @@ public class NextStep extends AppCompatActivity implements AddVehicle.OnFragment
             minutes = "0" + mins;
         else
             minutes = String.valueOf(mins);
-        String aTime = new StringBuilder().append(hours).append(':').append(minutes).append(" ").append(timeSet).toString();
+        String aTime = new StringBuilder().append(hours).append(':').append(minutes).append(':').append("00").append(" ").append(timeSet).toString();
         time_txt.setText(aTime);
     }
 
@@ -216,6 +216,7 @@ public class NextStep extends AppCompatActivity implements AddVehicle.OnFragment
         if(hour>=hr && minute>=min)
         {
             Intent i = new Intent(this, SuccessfulBooking.class);
+            //Toast.makeText(NextStep.this, diff+" "+hours_txt.getText()+" "+minutes_txt.getText(), Toast.LENGTH_LONG).show();
             i.putExtra("time_left",diff);
             i.putExtra("level_number",level_number);
             i.putExtra("slot_number",slot_number);
@@ -227,8 +228,6 @@ public class NextStep extends AppCompatActivity implements AddVehicle.OnFragment
             startActivity(i);
             finish();
         }
-        else
-            Toast.makeText(NextStep.this, "Enter valid entry time.", Toast.LENGTH_LONG).show();
 
     }
 

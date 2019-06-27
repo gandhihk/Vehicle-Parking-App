@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -105,6 +106,7 @@ public class Register extends AppCompatActivity
                         public void onResponse(JSONObject response) {
                             try {
                                 //Toast.makeText(Register.this, response.toString(), Toast.LENGTH_SHORT).show();
+                                Log.i("sda",response.toString());
                                 if ((response.getString("message")).equals("success"))
                                 {
                                     JSONObject user = response.getJSONObject("user");

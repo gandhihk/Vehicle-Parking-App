@@ -1,5 +1,6 @@
 package com.example.vehicleparkingapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -44,7 +45,7 @@ public class MyProfile extends Fragment {
     private TextView username_txt,name;
 
     private OnFragmentInteractionListener mListener;
-
+    ProgressDialog pDialog;
     public MyProfile() {
         // Required empty public constructor
     }
@@ -75,6 +76,9 @@ public class MyProfile extends Fragment {
         rootview = inflater.inflate(R.layout.my_profile, container, false);
 
         requestQueue = Volley.newRequestQueue(getActivity());
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setMessage("Loading...");
+        pDialog.show();
 
         SessionManager s = new SessionManager(getContext());
         SharedPreferences sp = s.pref;
@@ -104,6 +108,7 @@ public class MyProfile extends Fragment {
         name.setText(first_name+" "+last_name);
         address_txt.setText(address);
         licence_txt.setText(licence);
+        pDialog.hide();
     }
 
     public static void edit(View view)
@@ -133,7 +138,7 @@ public class MyProfile extends Fragment {
         }else if(add.equals("")){
             address_txt.setError("This field is required.");
             address_txt.requestFocus();
-        }else if(lic.length()!=16){
+        }else if(lic.length()!=12){
             licence_txt.setError("Invalid licence number");
             licence_txt.requestFocus();
         }
