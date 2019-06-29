@@ -36,7 +36,9 @@
 
         <activity
             android:name=".OTPValidation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustNothing">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

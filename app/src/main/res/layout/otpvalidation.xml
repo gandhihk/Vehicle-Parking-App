@@ -29,17 +29,20 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/first_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"
         android:layout_marginTop="170dp">
 
         <TextView
             android:id="@+id/otp_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:text="An OTP was sent to \nyour registered mobile number.\nEnter that OTP here : "
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -51,8 +54,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:layout_below="@+id/otp_txt"
-            android:layout_centerHorizontal="true"
-            android:focusableInTouchMode="true"
+            android:layout_gravity="center_horizontal"
             android:textAlignment="center"
             android:textColor="@color/black" />
 
@@ -60,9 +62,8 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_below="@+id/otp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/otp_txt_layout"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/button"
             android:onClick="checkOTP"
@@ -74,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="@drawable/verified"
             android:visibility="gone" />
@@ -84,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/verified_img"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:text="Congratulations!!\nYou are successfully registered."
             android:textAlignment="center"
@@ -92,7 +93,7 @@
             android:textSize="18sp"
             android:visibility="gone" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

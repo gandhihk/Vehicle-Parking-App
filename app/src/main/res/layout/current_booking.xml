@@ -242,9 +242,31 @@
                     android:layout_alignParentBottom="true"
                     android:textSize="16sp"
                     android:layout_marginBottom="4dp"
-                    android:onClick="make_payment"
+                    android:onClick="make_offline_payment"
                     android:visibility="gone"
-                    android:text="Make Offline payment" />
+                    android:text="Choose Offline payment" />
+
+                <ImageView
+                    android:id="@+id/verified_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/verified"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/successful_verify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/verified_img"
+                    android:text="Parking ended. Make Offline payment\n at exit within 10 minutes."
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

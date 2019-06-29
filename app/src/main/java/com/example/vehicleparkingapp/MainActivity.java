@@ -365,6 +365,10 @@ public class MainActivity extends AppCompatActivity
     public void extendParking(View view) {
         CurrentSession.extendParking(view,this);
     }
+
+    public void make_offline_payment(View view) {
+        CurrentSession.makeOfflinePayment(view, getApplicationContext());
+    }
 }
 
 class User

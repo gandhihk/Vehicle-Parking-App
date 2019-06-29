@@ -397,7 +397,11 @@ public class CurrentSession extends Fragment {
                             if ((response.getString("message")).equals("success"))
                             {
                                 int total_fare = response.getInt("total_fare");
+                                int duration = response.getInt("duration");
+                                //duration_txt.setText("Duration :    "+duration+" minutes");
                                 total_fare_txt.setText("Total Fare :    "+total_fare+" Rs.");
+                                View parent = (View)((total_fare_txt.getParent()).getParent());
+                                ((TextView)parent.findViewById(R.id.duration)).setText("Duration :    "+duration+" minutes");
                             }
 
                         } catch (JSONException e) {
@@ -485,6 +489,50 @@ public class CurrentSession extends Fragment {
         });
 
         alertDialog.show();
+    }
+
+    static void makeOfflinePayment(View view, final Context context)
+    {
+        final View parent = (View)(((view.getParent()).getParent()).getParent()).getParent();
+        final Map<String,String> params = new HashMap<>();
+        //Adding parameters to request
+        params.put(ConfigConstants.KEY_USERNAME, username);
+        params.put("booking_id",((TextView)parent.findViewById(R.id.booking_id)).getText().toString().substring(15));
+        params.put("operation","choose_offline_payment");
+        //Toast.makeText(context, extension+" "+booking_id1, Toast.LENGTH_LONG).show();
+
+        //Creating a json request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, ConfigConstants.CREATE_BOOKING, new JSONObject(params), new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
+                            if ((response.getString("message")).equals("success"))
+                            {
+                                parent.findViewById(R.id.online_pay).setVisibility(View.GONE);
+                                parent.findViewById(R.id.offline_pay).setVisibility(View.GONE);
+                                parent.findViewById(R.id.verified_img).setVisibility(View.VISIBLE);
+                                parent.findViewById(R.id.successful_verify).setVisibility(View.VISIBLE);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context,
+                                    "Error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                //You can handle error here if you want
+                            }
+                        });
+
+        //Adding the string request to the queue
+        requestQueue.add(jsonObjectRequest);
     }
 
     public void setProgress(int startTime, int endTime, ProgressBar progressBarView, TextView booking_id_txt) {
